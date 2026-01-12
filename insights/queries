@@ -1,0 +1,30 @@
+## Insights from the Data
+
+Digging into the database, some patterns jumped out, and each revealed something meaningful about customer behavior, film popularity, and business performance:
+
+- **Inactive Customers Still Matter.** Even customers labeled as inactive had occasional rentals. This means engagement isn’t binary, occasional activity can signal latent interest. Targeted campaigns or reminders could reactivate these users and increase revenue.  
+
+- **High-Value Customers Drive Revenue.** A small set of top customers rent significantly more than average. Recognizing these high-value customers allows for **loyalty programs, VIP promotions, or tailored marketing** that reward frequent renters.  
+
+- **Actor Influence Shapes Film Popularity.** Certain actors appear in dozens of films and consistently attract rentals. Understanding this can guide **casting choices, promotion, and cross-marketing strategies** for films with high-performing actors.  
+
+- **Film Performance Varies Widely.** While some films are rented repeatedly, a noticeable number of films are **never rented**. These underperforming films could be bundled in promotions, discounted, or reviewed for removal, optimizing inventory and shelf space.  
+
+- **Revenue is Concentrated in Key Categories.** “Family” and “Action” films generate the most revenue, showing that genre preferences strongly influence business outcomes. Marketing and stocking decisions should reflect these trends.  
+
+- **Monthly Rental Trends Highlight Seasonality.** Rentals peak during specific months, likely corresponding to holidays or seasonal events. This knowledge can inform **staffing, inventory planning, and marketing campaigns** to capitalize on high-demand periods.  
+
+- **Store Performance is Uneven.** Some stores outperform others in revenue and rental volume. Understanding **regional performance differences** can help allocate resources, staff, and marketing budgets effectively.  
+
+- **Average Rental Duration Varies by Genre.** Adventure and Sci-Fi categories show longer average rental durations, suggesting customers engage more deeply with certain genres. This can influence **inventory rotation and stocking decisions**.  
+
+- **Payment Patterns Reveal Staff and Store Contributions.** Tracking total payments per staff member and per store highlights **top performers** and areas where efficiency or training may be improved.  
+
+- **Customer Segmentation Reveals Marketing Opportunities.** Customers in specific regions (e.g., London) or those with high spending patterns are perfect targets for **localized promotions, loyalty programs, and personalized campaigns**.  
+
+- **Combining Multiple Perspectives Yields Deeper Insights.** Looking at rentals, inventory, payments, and staff performance together uncovered patterns invisible when analyzed individually. For example, a film may rent often in one store but not in another, revealing **regional preferences** and opportunities for tailored marketing.  
+
+- **Window Functions Provide Context.** Using ROW_NUMBER, RANK, DENSE_RANK, and LAG allowed me to **see trends across rows without losing detail**, revealing high-performing films, top customers, and rental sequences in ways aggregates alone couldn’t.  
+
+
+
