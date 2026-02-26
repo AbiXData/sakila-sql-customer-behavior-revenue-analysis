@@ -120,5 +120,5 @@ This project showcases how SQL can be used to:
 
 ## 📬 Contact
 
-LinkedIn: [Add Link]
-Email: [Add Email]
+LinkedIn: [(https://www.linkedin.com/in/abitijani/)]
+Email: [abi.tijanii@gmail.com]
