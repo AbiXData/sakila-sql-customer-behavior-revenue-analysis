@@ -96,3 +96,28 @@ SELECT
 FROM customer c
 JOIN payment p ON c.customer_id = p.customer_id
 GROUP BY c.customer_id;
+
+---
+
+## 💼 Business Value Demonstrated
+
+This project showcases how SQL can be used to:
+
+- Identify revenue drivers
+- Segment customers strategically
+- Detect performance gaps
+- Support promotional and operational decisions
+- Transform raw transactional data into actionable insights
+
+## 🚀 Skills Demonstrated
+
+- Advanced SQL querying
+- Window function mastery
+- Data storytelling
+- Business-focused analytical thinking
+- Structured case study documentation
+
+## 📬 Contact
+
+LinkedIn: [Add Link]
+Email: [Add Email]
