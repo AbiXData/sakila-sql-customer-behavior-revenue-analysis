@@ -1,75 +1,98 @@
-# Exploring the Sakila Database: A Journey Through Data
+# Customer Behavior & Revenue Analysis (SQL Case Study)
 
-## Project Purpose
-The purpose of this project is to explore the Sakila database, answer common business questions, and extract actionable insights. This demonstrates my ability to work with SQL queries, aggregate data, and provide business-relevant analysis. My goal wasn’t just to run queries, but to understand the story behind the numbers. Here’s what I discovered along the way.
+## 📌 Project Overview
 
-## What I Set Out to Learn
+This project analyzes customer behavior, revenue performance, and rental activity using the Sakila database.
 
-Stepping into the Sakila database felt like exploring a small movie rental universe, customers, films, actors, payments, stores… so much happening all at once.  
+The objective was to extract actionable insights that could support decision-making around promotions, customer segmentation, and store performance optimization.
 
-I wanted to answer questions like:
-
-- Which customers are truly active, and who could use a nudge?  
-- Which films are hits, and which sit on the shelves unnoticed?  
-- How does revenue and performance vary across stores and categories?  
-- And importantly, how can I use SQL, especially **window functions** to uncover trends I might otherwise miss?
-
----
-## Insights from the Data
-
-Digging into the database, some patterns jumped out:
-
-- Even “inactive” customers weren’t completely gone. Many rented occasionally. That latent engagement told me there’s room for **targeted promotions or re-engagement campaigns**.  
-- Some actors and films dominate. Top actors appeared in dozens of films, while the most rented movies consistently brought in revenue. Understanding this helped me see **who and what drives popularity**.  
-- Revenue isn’t evenly spread. Categories like **Family** and **Action** and certain stores outperform the other and that is a reminder that **not all data points carry the same weight**.  
-- Timing matters. Rentals peak during certain months, likely around holidays or events, which makes planning promotions, staffing, and inventory much smarter.  
-- Segmenting customers works. Top spenders, regional clusters, and high-frequency renters all have different needs and opportunities for engagement.  
-- Underperforming films are just as important as hits. Identifying movies that never rented gave me ideas for **bundling, promotion, or removal**.  
-- And finally, connecting perspectives, rentals, payments, inventory, staff activity, reveals **hidden patterns you wouldn’t see in isolated numbers**.
+Rather than running isolated queries, the focus was on uncovering patterns and telling the story behind the numbers using advanced SQL techniques, including window functions.
 
 ---
 
-## Lessons from Window Functions
+## 🎯 Business Questions Addressed
 
-Working with window functions completely changed how I think about SQL.  
-
-- **Window functions don’t collapse rows.** They let you see trends while keeping all the original data visible, that's a huge shift in mindset.  
-- **ROW_NUMBER, RANK, and DENSE_RANK** behave differently, testing them on real data made the distinctions crystal clear.  
-- **LAG** is a lifesaver. Accessing the previous row without joins or subqueries felt almost magical.  
-- **CTEs simplify everything.** Breaking queries into stages makes complex logic easier to read and debug.  
-- **Running totals teach precision.** ORDER BY inside the window frame controls progression, once understood, cumulative calculations became intuitive.  
-- Multi-window analyses, joining tables, ranking, aggregating, and filtering,  **showed how window functions fit into real workflows**, not just theory.  
-
-By the end, I realized that window functions aren’t just SQL features; they’re tools for **telling the story hidden in the data**.
+- Which customers generate the highest revenue?
+- Which film categories drive the most rentals and revenue?
+- How does store performance compare?
+- Are there seasonal rental trends?
+- How can customer segmentation improve engagement?
 
 ---
 
-## Practical Tips I Picked Up
+## 🛠 Tools & Techniques
 
-- Start with **questions, not queries**. Know what you want to learn before writing SQL.  
-- Break complex logic into **CTEs** instead of one long query.  
-- Test similar functions side-by-side. ROW_NUMBER vs. RANK vs. DENSE_RANK clicks when you see them in action.  
-- Use **LAG and LEAD** for previous or next row logic, it avoids messy joins.  
-- Pay attention to **window frames**. ORDER BY and PARTITION BY can completely change your results.  
-- Export or visualize results to spot patterns. Numbers are one thing; charts make trends obvious.  
-- Document assumptions and double-check each step. It saves headaches later.  
-
----
-
-## Key Takeaways
-
-1. **Data tells stories.** Look beyond aggregates to see what’s really happening.  
-2. **Window functions unlock insights.** They reveal trends, rankings, and previous values without collapsing data.  
-3. **Break it down.** Stepwise queries, CTEs, and logical ordering make analysis manageable.  
-4. **Insights lead to action.** Knowing your high-value customers, best-performing films, and seasonal patterns lets you make smarter decisions.  
+- MySQL
+- Complex JOINs
+- Aggregations (SUM, COUNT, AVG)
+- GROUP BY & HAVING
+- Window Functions (ROW_NUMBER, RANK, DENSE_RANK, LAG)
+- Common Table Expressions (CTEs)
 
 ---
 
-## Technologies Used
+## 🔍 Key Analysis & Insights
 
-- **SQL (MySQL)** – querying, aggregation, and window functions  
-- **Sakila Database** – sample dataset for films, customers, rentals, and staff  
+### 1️⃣ Revenue Concentration
+
+A small group of customers contributes disproportionately to overall revenue.  
+This suggests opportunities for loyalty programs and targeted retention strategies.
 
 ---
 
-This README tells the story of my **journey through Sakila**, from raw data to actionable insights. It’s not just about queries, it’s about **learning to think with data**.
+### 2️⃣ Category Performance
+
+Categories such as **Family** and **Action** consistently outperform others.  
+Strategic promotion of high-performing genres could further increase revenue.
+
+---
+
+### 3️⃣ Store Comparison
+
+Revenue is not evenly distributed across stores.  
+Performance differences indicate potential location-based optimization strategies.
+
+---
+
+### 4️⃣ Seasonal Trends
+
+Rental activity peaks during specific months, likely aligned with holidays or seasonal behavior patterns.  
+This insight supports smarter staffing and promotional planning.
+
+---
+
+### 5️⃣ Customer Segmentation
+
+Using ranking and window functions, customers were segmented into:
+- High-frequency renters
+- High spenders
+- Occasional renters
+
+This segmentation allows for differentiated engagement strategies.
+
+---
+
+## 🧠 Advanced SQL: Window Functions in Practice
+
+Window functions enabled:
+
+- Ranking top customers without collapsing rows
+- Comparing current vs. previous rental activity using LAG
+- Generating running totals for cumulative revenue
+- Multi-level partitioning for deeper segmentation
+
+These techniques demonstrate the ability to analyze trends while preserving row level detail essential for real-world analytics.
+
+---
+
+## 📊 Example Query
+
+```sql
+SELECT 
+    c.customer_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    SUM(p.amount) AS total_revenue,
+    RANK() OVER (ORDER BY SUM(p.amount) DESC) AS revenue_rank
+FROM customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY c.customer_id;
