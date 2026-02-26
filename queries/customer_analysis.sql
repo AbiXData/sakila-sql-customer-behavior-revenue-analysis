@@ -29,7 +29,7 @@ SELECT c.first_name, c.last_name, COUNT(r.rental_id) AS rental_count
 FROM customer c
 JOIN rental r
 ON c.customer_id = r.customer_id
-WHERE c.active = 'FALSE'
+WHERE c.active = FALSE
 GROUP BY 1,2;
 
 -- =========================================
@@ -61,7 +61,7 @@ SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name
 FROM customer c
 LEFT JOIN rental r
 ON c.customer_id = r.customer_id
-WHERE r.rental_id = 'NULL';
+WHERE r.rental_id IS NULL;
 
 -- =========================================
 -- Customer payments over time + LAG(amount) window function but customer-behavior focused)
