@@ -54,3 +54,9 @@ FROM film;
 SELECT COUNT(actor_id) AS actor_count
 FROM actor;
 
+-- =========================================
+-- Films with rental_rate above average
+-- =========================================
+SELECT title, rental_rate
+FROM film
+WHERE rental_rate > (SELECT AVG(rental_rate) FROM film);
