@@ -74,20 +74,20 @@ The analysis focuses on five core business themes:
 • Identify high-value customers
 • Understand spending behavior and rental activity
 
-Revenue Analysis
+#### Revenue Analysis
 
 • Measure revenue concentration across customers
 • Evaluate store-level revenue distribution
 
-Category Performance
+#### Category Performance
 
 • Determine which film genres drive the most rentals
 
-Store Performance
+#### Store Performance
 
 • Compare inventory levels and revenue across stores
 
-Advanced SQL Techniques
+#### Advanced SQL Techniques
 
 • Window functions for ranking and trend analysis
 • Common Table Expressions (CTEs)
