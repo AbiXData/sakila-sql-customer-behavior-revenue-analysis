@@ -55,22 +55,6 @@ The schema reflects a transactional business environment, making it suitable for
 
 ---
 
-## 📂 Repository Structure
-## 📂 Repository Structure
-
-sakila-sql-customer-behavior-revenue-analysis
-│
-├── README.md
-└── sakila_business_analysis.sql
-
-Customer-Behavior-and-Revenue-Analysis
-│
-├── insights 
-├── queries
-└── README.md
-
----
-
 ## Analysis Areas
 
 The analysis focuses on five core business themes:
@@ -211,6 +195,15 @@ This project showcases how SQL can be used to:
 • Window functions for ranking and trend detection  
 • Customer segmentation logic using ranking techniques  
 • Use of Common Table Expressions (CTEs) for structured analysis  
+
+---
+ ## ⚙️ How to Run
+
+1. Import the Sakila database into MySQL
+2. Open the SQL script in MySQL Workbench
+3. Execute queries to reproduce the analysis
+
+---
 
 ## 📬 Author
 
