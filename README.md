@@ -4,9 +4,11 @@
 
 This project analyzes customer behavior, revenue performance, and rental activity using the Sakila database.
 
-The objective was to extract actionable insights that could support decision-making around promotions, customer segmentation, and store performance optimization.
+The objective of the analysis is to uncover actionable insights that could support business decisions related to customer segmentation, promotional strategy, and store performance optimization.
 
-Rather than running isolated queries, the focus was on uncovering patterns and telling the story behind the numbers using advanced SQL techniques, including window functions.
+Using MySQL, the project explores patterns in customer spending, rental demand, category performance, and store-level revenue distribution.
+
+The analysis demonstrates how SQL can transform raw transactional data into meaningful business insights.
 
 ---
 
