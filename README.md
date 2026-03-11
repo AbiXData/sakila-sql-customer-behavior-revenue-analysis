@@ -59,9 +59,9 @@ The schema reflects a transactional business environment, making it suitable for
 
 Customer-Behavior-and-Revenue-Analysis
 │
-├── README.md
-├── queries.sql
-└── insights.md
+├── insights 
+├── queries
+└── README.md
 
 ---
 
