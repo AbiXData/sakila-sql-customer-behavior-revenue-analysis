@@ -69,7 +69,7 @@ Customer-Behavior-and-Revenue-Analysis
 
 The analysis focuses on five core business themes:
 
-### Customer Analysis
+#### Customer Analysis
 
 • Identify high-value customers
 • Understand spending behavior and rental activity
