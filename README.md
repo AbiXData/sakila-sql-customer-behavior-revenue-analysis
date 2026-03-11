@@ -32,6 +32,9 @@ The dataset contains information on:
 The relational structure allows for realistic multi-table analysis using joins and aggregations.
 The schema reflects a transactional business environment, making it suitable for analyzing customer behavior, revenue generation, and product demand patterns.
 
+Dataset source:
+https://dev.mysql.com/doc/sakila/en/
+
 ---
 
 ## 🎯 Business Questions Addressed
