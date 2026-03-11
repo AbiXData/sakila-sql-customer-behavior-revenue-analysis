@@ -56,6 +56,12 @@ The schema reflects a transactional business environment, making it suitable for
 ---
 
 ## 📂 Repository Structure
+## 📂 Repository Structure
+
+sakila-sql-customer-behavior-revenue-analysis
+│
+├── README.md
+└── sakila_business_analysis.sql
 
 Customer-Behavior-and-Revenue-Analysis
 │
