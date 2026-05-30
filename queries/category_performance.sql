@@ -17,13 +17,28 @@ ORDER BY avg_length DESC;
 
 -- =========================================
 -- 2) Number of films per category
--- Business use: category catalog depth / inventory mix
+-- Business use: Identify category Performance; category catalog depth + revenue + average rage 
 -- =========================================
-SELECT c.name AS category_name, COUNT(fc.film_id) AS film_count
+SELECT 
+    c.name AS category_name,
+    COUNT(DISTINCT fc.film_id) AS film_count,
+    COUNT(r.rental_id) AS total_rentals,
+    ROUND(SUM(p.amount), 2) AS total_revenue,
+    ROUND(AVG(f.rental_rate), 2) AS avg_rental_rate,
+    ROUND(SUM(p.amount) / COUNT(r.rental_id), 2) AS revenue_per_rental
 FROM category c
-JOIN film_category fc ON fc.category_id = c.category_id
+JOIN film_category fc 
+ON fc.category_id = c.category_id
+JOIN film f 
+ON f.film_id = fc.film_id
+JOIN inventory i 
+ON i.film_id = f.film_id
+JOIN rental r 
+ON r.inventory_id = i.inventory_id
+JOIN payment p 
+ON p.rental_id = r.rental_id
 GROUP BY c.name
-ORDER BY film_count DESC;
+ORDER BY total_revenue DESC;
 
 -- =========================================
 -- 3) Films priced above average rental rate
@@ -35,19 +50,25 @@ WHERE rental_rate > (SELECT AVG(rental_rate) FROM film)
 ORDER BY rental_rate DESC;
 
 -- =========================================
--- 4) Top 5 most rented films
+-- 4) Top 5 most rented films with revenue
 -- Business use: identify demand leaders
 -- =========================================
-SELECT f.title, COUNT(r.rental_id) AS rental_count
+SELECT f.title,
+    COUNT(r.rental_id) AS rental_count,
+    SUM(p.amount) AS total_revenue,
+    ROUND(SUM(p.amount) / COUNT(r.rental_id), 2) AS revenue_per_rental
 FROM film f
-JOIN inventory i
+JOIN inventory i 
 ON f.film_id = i.film_id
-JOIN rental r
+JOIN rental r 
 ON r.inventory_id = i.inventory_id
-GROUP BY 1
-ORDER BY rental_count DESC
+JOIN payment p 
+ON p.rental_id = r.rental_id
+GROUP BY f.title
+ORDER BY total_revenue DESC
 LIMIT 5;
 
+     -- 💡 A film rented 40x at $4.99 beats one rented 50x at $0.99 
 -- =========================================
 -- 5) Rank films by rental rate within each category (DENSE_RANK)
 -- Business use: identify highest priced films per category
@@ -74,3 +95,43 @@ SELECT title, replacement_cost, rating
 FROM rownumber_per_rating
 WHERE ranknumber <= 3
 ORDER BY rating, replacement_cost desc;
+
+-- =========================================
+-- 7) Monthly rental trend by top 5 categories 
+-- Business use: identify category demand trend (Month-over-Month)
+-- =========================================
+WITH category_monthly AS (
+    SELECT c.name AS category,
+        DATE_FORMAT(r.rental_date, '%Y-%m') AS rental_month,
+        COUNT(r.rental_id) AS monthly_rentals
+    FROM category c
+    JOIN film_category fc 
+    ON fc.category_id = c.category_id
+    JOIN film f           
+    ON f.film_id = fc.film_id
+    JOIN inventory i      
+    ON i.film_id = f.film_id
+    JOIN rental r         
+    ON r.inventory_id = i.inventory_id
+    GROUP BY c.name, rental_month
+)
+SELECT *
+FROM category_monthly
+WHERE category IN (
+    SELECT name FROM (
+        SELECT c.name, COUNT(r.rental_id) AS total
+        FROM category c
+        JOIN film_category fc 
+        ON fc.category_id = c.category_id
+        JOIN film f           
+        ON f.film_id = fc.film_id
+        JOIN inventory i      
+        ON i.film_id = f.film_id
+        JOIN rental r         
+        ON r.inventory_id = i.inventory_id
+        GROUP BY c.name
+        ORDER BY total DESC
+        LIMIT 5
+    ) top5
+)
+ORDER BY category, rental_month;
