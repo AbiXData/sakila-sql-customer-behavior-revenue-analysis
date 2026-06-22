@@ -27,7 +27,7 @@ ON fc.category_id = c.category_id;
 -- ROW_NUMBER() partition by rating (top 3 per rating)
 -- =========================================
 WITH rownumber_per_rating AS (SELECT title, replacement_cost, rating, 
-ROW_NUMBER() OVER(PARTITION BY rating) ranknumber
+ROW_NUMBER() OVER(PARTITION BY rating ORDER BY replacement_cost DESC) ranknumber
 FROM film)
 SELECT title, replacement_cost, rating
 FROM rownumber_per_rating
