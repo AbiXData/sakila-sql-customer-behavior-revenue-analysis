@@ -88,8 +88,7 @@ ORDER BY c.name, dense_rank_row;
 -- Business use: identify highest value inventory by rating
 -- =========================================
 WITH rownumber_per_rating AS (SELECT title, replacement_cost, rating, 
-ROW_NUMBER() OVER(PARTITION BY rating
-ORDER BY replacement_cost DESC) AS ranknumber
+ROW_NUMBER() OVER(PARTITION BY rating ORDER BY replacement_cost DESC) AS ranknumber
 FROM film)
 SELECT title, replacement_cost, rating
 FROM rownumber_per_rating
